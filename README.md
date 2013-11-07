@@ -24,7 +24,7 @@ It's similar to [TodoMVC](http://todomvc.com/") but with more stuff you might en
 
 ### Durandal ([durandaljs.com](http://durandaljs.com))
 
-`examples/angular/app/index.html`
+`examples/durandal/app/index.html`
 
 ## Usage
 

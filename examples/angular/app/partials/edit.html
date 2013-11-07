@@ -1,0 +1,100 @@
+
+
+        <div ng-show="isViewLoading" class="app-view-loading-indicator progress progress-striped active">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="app-view is-loading"  ng-class="{'is-loading': isViewLoading}">
+        <form name="portfolioForm" novalidate>
+           <div class="row">
+                <div class="col-md-2">
+                    <a class="go-back" href="#">Back to List</a>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-4 form-group" ng-class="{'has-error': !portfolioForm.portfolioName.$valid}">
+                    <label for="portfolioName">Name</label>
+                    <input type="text"  class="form-control"  name="portfolioName" ng-model="portfolio.name" required>
+                </div>
+                 <div class="col-md-4 form-group" ng-class="{'has-error': !portfolioForm.strategy.$valid}">
+                    <label for="strategy">Strategy</label>
+                    <select  class="form-control"  name="strategy" required ng-model="portfolio.strategy" ng-options="strategy for strategy in availableStrategies">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group" ng-class="{'has-error': !portfolioForm.nextReviewDate.$valid}">
+                    <label for="reviewDate">Next Review Date</label>
+                    <input type="text" required class="form-control" name="nextReviewDate" ng-model="portfolio.nextReviewDate" jqui-datepicker />
+                </div>
+            </div>
+      
+
+            <div class="row add-investment-title">
+                <h2>Investments</h2>
+                <a  tabindex="-1"  class="btn btn-primary btn-xs"
+                    href="javascript:;" ng-click="addInvestment()">Add Investment</a>
+            </div>
+
+            <div class="row">
+               <div class="col-md-8">
+                   <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Investment</th>
+                                <th>Type</th>
+                                <th class="col-percentage">Percentage</th>
+                                <th><!--Actions--></th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <!-- ko foreach: investments -->
+                            <tr ng-repeat="investment in portfolio.investments">
+                                <td>
+                                    <span >{{ investment.name }}</span>
+                                    <sup>
+                                        <a tabindex="-1" href="javascript:;" target="_blank" 
+                                        ng-href="https://www.google.com/finance?q={{investment.tickerSymbol}}">
+                                            {{ investment.tickerSymbol }}
+                                        </a>
+                                    </sup>
+                                </td>
+                                <td >{{investment.type}}</td>
+                                <td class="col-percentage">
+                                    <input type="text" class="form-control" ng-model="investment.targetPercentage" percentage/>
+                                </td>
+                                <td class="col-actions">
+                                    <a tabindex="-1" class="btn btn-xs btn-danger"  href="javascript:;" ng-click="destroyInvestment(investment)">Delete</a>
+                                </td>
+                            </tr>
+                            <tr ng-hide="portfolio.investments.length">
+                                <td colspan="4" class="no-data has-error">
+                                   There are no investments in this portfolio.
+                                </td>
+                            </tr>
+
+                            <tr class="row-total">
+                                <td colspan="2">&nbsp;</td>
+                                <td class="col-percentage" >{{ grandTotal.percentage() }}</td>
+                                <td class="col-actions has-error" >
+                                    <div ng-show="grandTotal.showHelper">
+                                        <span>{{ grandTotal.isTooLow ? 'Add' : 'Remove' }}</span>
+                                        <span>{{ grandTotal.delta }}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+               </div>
+               <div  class="col-md-4">
+                    <div class="chart" piechart piechart-series="portfolioBreakdown"></div>
+               </div>
+                 
+            </div>
+           
+             <div class="row">
+                <button class="edit-portfolio btn btn-primary" ng-click="save()" ng-disabled="isSaving">{{ isSaving ? 'Saving...' : 'Save' }}</button>    
+                <a href="#">Cancel</a>         
+             </div>
+            </form>
+        </div>

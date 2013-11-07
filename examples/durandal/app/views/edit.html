@@ -1,0 +1,99 @@
+
+        <div data-bind="visible: isViewLoading" class="app-view-loading-indicator progress progress-striped active">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="app-view" data-bind="css: {'is-loading': isViewLoading}">
+
+                        <div class="row">
+                <div class="col-md-2">
+                    <a class="go-back" href="#">Back to List</a>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-4 form-group" data-bind="css:{'has-error': !name.isValid()}">
+                    <label for="portfolioName">Name</label>
+                    <input type="text"  class="form-control"  name="portfolioName" data-bind="value: name">
+                </div>
+                 <div class="col-md-4 form-group" data-bind="css:{'has-error': !strategy.isValid()}">
+                    <label for="strategy">Strategy</label>
+                    <select  class="form-control"  name="strategy" data-bind="value: strategy, options: availableStrategies, optionsCaption:''"></select>
+                </div>
+                <div class="col-md-4 form-group" data-bind="css:{'has-error': !nextReviewDate.isValid()}">
+                    <label for="reviewDate">Next Review Date</label>
+                    <input type="text"  class="date-picker form-control" name="reviewDate" data-bind="datepicker: nextReviewDate">
+                </div>
+            </div>
+      
+
+            <div class="row add-investment-title">
+                <h2>Investments</h2>
+                <a data-bind="click: openInvestmentPicker" tabindex="-1" data-toggle="modal" href="#add-investment-dialog" class="btn btn-primary btn-xs">Add Investment</a>
+            </div>
+
+            <div class="row">
+               <div class="col-md-8">
+                   <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Investment</th>
+                                <th>Type</th>
+                                <th class="col-percentage">Percentage</th>
+                                <th><!--Actions--></th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <!-- ko foreach: investments -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: name"></span>
+                                    <sup><a tabindex="-1" href="javascript:;" target="_blank" data-bind="text: tickerSymbol, attr:{'href':'https://www.google.com/finance?q='+tickerSymbol}">MSFT</a></sup>
+                                </td>
+                                <td data-bind="text: type"></td>
+                                <td class="col-percentage">
+                                    <input type="text" class="form-control" data-bind="value: targetPercentage"/>
+                                </td>
+                                <td class="col-actions">
+                                    <a tabindex="-1" class="btn btn-xs btn-danger"  href="javascript:;" data-bind="click: $parent.destroyInvestment">Delete</a>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- ko if: investments().length === 0 -->
+                            <tr>
+                                <td colspan="4" class="no-data has-error">
+                                   There are no investments in this portfolio.
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <tr class="row-total">
+                                <td colspan="2">&nbsp;</td>
+                                <td class="col-percentage" >
+                                    <span data-bind="text: grandTotal.percentage"></span><br/>
+                                    
+                                </td>
+                                <td class="col-actions has-error">
+                                    <!-- ko if: grandTotal.showHelper -->
+                                    <span data-bind="text: grandTotal.isTooLow() ? 'Add' : 'Remove'"></span>
+                                    <span data-bind="text: grandTotal.delta"></span> 
+                                    <!-- /ko -->
+                                </td>
+                               
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+               </div>
+               <div  class="col-md-4">
+                    <div class="chart" data-bind="pieChart: portfolioBreakdown"></div>
+               </div>
+                 
+            </div>
+           
+             <div class="row">
+                <button class="edit-portfolio btn btn-primary" 
+                    data-bind="click: save, text: isSaving() ? 'Saving...' : 'Save', enable: !isSaving()"></button>    
+                <a href="#">Cancel</a>         
+             </div>
+
+        </div>

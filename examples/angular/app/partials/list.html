@@ -1,0 +1,57 @@
+
+    
+        <div ng-show="isViewLoading" class="app-view-loading-indicator progress progress-striped active">
+            <div class="progress-bar"></div>
+        </div>
+
+
+         <div class="app-view is-loading" ng-class="{'is-loading': isViewLoading}">
+             <div class="row">
+                <div class="col-md-3">
+                    <input ng-model="searchTerm" type="text" class="form-control search-box" placeholder="Search" />
+                </div>
+            </div>
+
+            <div class="row">
+                 <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a data-ng-click="sortBy('name')" href="javascript:;">Name</a>
+                                <span class='sorted' ng-class="{'descending' : sortingDesc}" ng-show="sortingByColumn === 'name'"></span>
+                            </th>
+                            <th>
+                                <a data-ng-click="sortBy('strategy')" href="javascript:;">Strategy</a>
+                                <span class='sorted' ng-class="{'descending' : sortingDesc}" ng-show="sortingByColumn === 'strategy'"></span>
+                            </th>
+                            <th>
+                                <a data-ng-click="sortBy('nextReviewDate')" href="javascript:;">Next Review Date</a>
+                                <span class='sorted'  ng-class="{'descending' : sortingDesc}" ng-show="sortingByColumn === 'nextReviewDate'"></span>
+                            </th>
+                            <th><!-- Actions --></th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr ng-repeat="portfolio in filteredPortfolios = (portfolios | filter: searchTerm | orderBy:sortingByColumn:sortingDesc)" >
+                            <td>{{ portfolio.name }}</td>
+                            <td>{{ portfolio.strategy }}</td>
+                            <td>{{ portfolio.nextReviewDate | date : 'yyyy-MM-dd' }}</td>
+                            <td  class="col-actions">
+                                 <a class="edit-portfolio-action btn btn-xs btn-primary" href="javascript:;" ng-href="#/edit/{{portfolio.id}}">Edit</a>
+                                <a class="btn btn-xs btn-danger" ng-click="destroy(portfolio)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+            <div class="row" ng-hide="filteredPortfolios.length">
+                <div class="no-data">
+                    No portfolios match your current search filter.  
+                </div>    
+            </div>
+
+            <div class="row">
+                <a href="#/new" class="edit-portfolio btn btn-primary">Create New</a>             
+             </div>
+        </div>

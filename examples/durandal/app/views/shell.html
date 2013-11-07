@@ -1,0 +1,42 @@
+﻿
+ <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">    
+            <a href="#">Investment Portfolios</a>
+        </span>
+    </div>
+    <div class="navbar-collapse collapse">
+
+         <ul class="nav navbar-nav navbar-right">
+
+             <!-- using direct references to routes in navigationModel to maintain control over styling -->
+
+             <!-- ko with: router.navigationModel()[0] -->
+                <li data-bind="css: { active: isActive }">
+                    <a data-bind="attr: { href: hash }">
+                        <span class="glyphicon glyphicon-align-justify"></span> List
+                    </a>
+                </li>
+             <!-- /ko -->
+
+             <!-- ko with: router.navigationModel()[1] -->
+                <li data-bind="css: { active: isActive }">
+                    <a data-bind="attr: { href: hash }">
+                        <span class="glyphicon glyphicon-asterisk"></span> New
+                    </a>
+                </li>
+             <!-- /ko -->
+
+         </ul>
+
+    </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container page-body" data-bind="router: { transition:'entrance', cacheViews:true }"></div>

@@ -1,0 +1,18 @@
+
+/* workaround for a bug in ui-bootstrap with bootstrap 3 
+http://stackoverflow.com/questions/16265844/invoking-modal-window-in-angularjs-bootstrap-ui-using-javascript
+*/
+
+.modal {
+    display: block;
+}
+.modal-body:before,
+.modal-body:after {
+    display: table;
+    content: " ";
+}
+.modal-header:before,
+.modal-header:after {
+    display: table;
+    content: " ";
+}

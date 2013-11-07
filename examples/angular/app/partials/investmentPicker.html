@@ -1,0 +1,68 @@
+    <div class="modal-dialog" role="dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+                <h4 class="modal-title">Add Investments</h4>
+            </div>
+            <div class="modal-body">
+
+                <div ng-show="isViewLoading" class="app-view-loading-indicator progress progress-striped active">
+                    <div class="progress-bar"></div>
+                </div>
+
+                <div class="app-view" ng-class="{'is-loading': isViewLoading}" >
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Investment</th>
+                                <th>Type</th>
+                                <th>Rating</th>
+                                <th><!--Actions--></th>
+                            </tr>
+                            <tr>
+                                <th class="form-group">
+                                    <input class="form-control" type="text" ng-model="filters.name"/>
+                                </th>
+                                <th  class="form-group">
+                                    <select  class="form-control" ng-model="filters.type" ng-options="type for type in filters.availableTypes">
+                                        <option></option>
+                                    </select>
+                                </th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr ng-repeat="investment in filteredInvestments = (availableInvestments | filter: filters.name | filter: filters.type)">
+                                <td>
+                                    <span >{{ investment.name }}</span>
+                                    <sup><a target="_blank" ng-href="https://www.google.com/finance?q={{investment.tickerSymbol}}">{{ investment.tickerSymbol }}</a></sup>
+                                </td>
+                                <td data-bind="text: type">{{ investment.type }} </td>
+                                <td ng-class="investment.rating | lowercase">
+                                    {{ investment.rating }}
+                                </td>
+                                <td >
+                                    <a class="btn btn-xs btn-primary" ng-click="selectInvestment(investment)" href="javascript:;">Add</a>
+                                </td>
+                            </tr>
+                           
+                            <tr ng-hide="filteredInvestments.length">
+                                <td colspan="4">
+                                    <div class="no-data">No investments match your current search criteria.</div>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()" data-bind="click: close">Close</button>
+            </div>
+        </div>
+    </div>
+
+

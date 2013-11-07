@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="portfoliosApp">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no"/>
+			
+		<title>Investment Portfolios - Angular</title>
+
+		<link href="../../../lib/bootstrap-3.0.0/css/bootstrap.css" rel="stylesheet">
+        <link href="../../../lib/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+
+		<link href="../../../css/main.css" rel="stylesheet">
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="lib/js/html5shiv.js"></script>
+		  <script src="lib/js/respond.min.js"></script>
+		<![endif]-->
+		
+		<!-- IE 10 mobile viewport issues --> 
+		<link href="../../../css/ie10mobile.css" rel="stylesheet">
+		<script src="../../../lib/js/ie10mobile.js"></script>
+
+        <!-- angular-specific-->
+        <link href="css/app.css" rel="stylesheet">
+		
+        
+    </head>
+    <body>
+        <div id="wrap">
+               <div class="navbar navbar-default navbar-fixed-top" ng-controller="HeaderCtrl">
+                <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">    
+                        <a href="#">Investment Portfolios</a>
+                    </span>
+                </div>
+                    <!--   -->
+                <div class="navbar-collapse collapse" >
+
+                     <ul class="nav navbar-nav navbar-right">
+                         <li ng-class="{'active': $route.current.scope.currentViewName === 'list' }" >
+                              <a href="#">
+                                    <span class="glyphicon glyphicon-align-justify"></span> List
+                                </a>
+                         </li>
+                        <li ng-class="{'active': $route.current.scope.currentViewName === 'new' }">
+                            <a href="#/new">
+                                <span class="glyphicon glyphicon-asterisk"></span> New
+                            </a>
+                        </li>
+                     </ul>
+
+                </div><!--/.nav-collapse -->
+                </div>
+            </div>
+
+            <div class="container page-body" ng-view></div>
+        
+        </div>
+
+         <div id="footer">
+            <div class="container">
+                <a href="../../../">mv-crud</a> / angular
+                <p class=" pull-right text-muted">Enterprisey examples of MV* and SPA libraries/frameworks by <a href="http://twitter.com/timplourde">@timplourde</a></p>
+            </div>
+        </div>
+        
+
+        <!-- In production use:
+          <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+          -->
+
+          <script src="../../../lib/jquery/jquery-1.10.2.js"></script>
+          <script src="../../../lib/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+          <script src="../../../lib/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+
+          <script src="../../../lib/highcharts/highcharts.js"></script>
+
+          <script src="lib/angular/angular.js"></script>
+          <script src="lib/angular/angular-route.js"></script>
+          <script src="lib/ui-bootstrap-tpls-0.6.0.js"></script>
+          
+          <script src="js/common.js"></script>
+          <script src="js/list.js"></script>
+          <script src="js/editor.js"></script>
+          <script src="js/app.js"></script>
+    </body>
+</html>

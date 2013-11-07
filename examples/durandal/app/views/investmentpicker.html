@@ -1,0 +1,85 @@
+<!--<div class="messageBox autoclose" style="max-width: 425px">
+    <div class="modal-header">
+        <h3>Select Investments</h3>
+    </div>
+    <div class="modal-body">
+        <table>
+            <tbody data-bind="foreach: availableInvestments">
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td >
+                        <a data-bind="click: $parent.selectInvestment">Add</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-bind="click: close">Close</button>
+    </div>
+</div>-->
+
+ <div class="messageBox autoclose modal-dialog" tabindex="-1" role="dialog" >
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-bind="click: close">&times;</button>
+            <h4 class="modal-title">Add Investments</h4>
+        </div>
+        <div class="modal-body">
+
+            <div data-bind="visible: isViewLoading" class="app-view-loading-indicator progress progress-striped active">
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="app-view" data-bind="css: {'is-loading': isViewLoading}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Investment</th>
+                            <th>Type</th>
+                            <th>Rating</th>
+                            <th><!--Actions--></th>
+                        </tr>
+                        <tr>
+                            <th class="form-group">
+                                <input class="form-control" type="text" data-bind="value: filters.name, valueUpdate: 'keyup'"/>
+                            </th>
+                            <th  class="form-group">
+                                <select  class="form-control" data-bind="value: filters.type, options: filters.availableTypes, optionsCaption: ''" >
+                              
+                                </select>
+                            </th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <!-- ko foreach: filteredInvestments-->
+                        <tr>
+                            <td>
+                                <span data-bind="text: name"></span>
+                                <sup><a href="javascript:;" target="_blank" data-bind="attr : { 'href' : 'https://www.google.com/finance?q=' + tickerSymbol }"></a></sup>
+                            </td>
+                            <td data-bind="text: type"> </td>
+                            <td data-bind="text: rating, attr: {'class': rating.toLowerCase()}"></td>
+                            <td >
+                                <a class="btn btn-xs btn-primary" data-bind="click: $parent.selectInvestment" href="#">Add</a>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        <!-- ko if: filteredInvestments().length === 0 -->
+                        <tr>
+                            <td colspan="4">
+                                <div class="no-data">No investments match your current search criteria.</div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: close">Close</button>
+        </div>
+</div>

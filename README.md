@@ -16,6 +16,16 @@ It's similar to [TodoMVC](http://todomvc.com/") but with more stuff you might en
 - Componentized for re-use
 - A pie chart!
 
+## Examples
+
+### Angular ([angularjs.com](http://anjularjs.com))
+
+`examples/angular/app/index.html`
+
+### Durandal ([durandaljs.com](http://durandaljs.com))
+
+`examples/angular/app/index.html`
+
 ## Usage
 
 If you're using **Firefox** just open the index.html file.

@@ -18,7 +18,7 @@ It's similar to [TodoMVC](http://todomvc.com/") but with more stuff you might en
 
 ## Examples
 
-### Angular ([angularjs.org](http://anjularjs.org))
+### Angular ([angularjs.org](http://angularjs.org))
 
 `examples/angular/app/index.html`
 

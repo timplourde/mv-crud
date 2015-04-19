@@ -28,14 +28,4 @@ It's similar to [TodoMVC](http://todomvc.com/") but with more stuff you might en
 
 ## Usage
 
-If you're using **Firefox** just open the index.html file.
-
-Otherwise, if you have [node.js](http://www.nodejs.org/) installed, just run `node web-server.js` and open [localhost:8181/index.html](http://localhost:8181/index.html).
-
-If you don't have node, you'll need to view it through a web server.  You can run your own (like IIS Express, Apache, etc.).
-
-## TODO
-
-- Angular unit tests
-- Durandal unit tests
-
+Run a local web server (try [http-server](https://www.npmjs.com/package/http-server) if you don't have one) and open `index.html`
